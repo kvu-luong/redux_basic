@@ -16,28 +16,30 @@ class App extends Component {
       switch(action.type){
         case "CHANGE_STATUS":
             return {...oldState, editStatus: !state.editStatus }
-            break;
         case "ADD_NEW":
             return {...oldState, num: [...state.num, action.newItem]}
-            break;
         case "DELETE":
             return {...oldState, num: state.num.filter((value, key)=>{
-              return key != action.index;
+              return key !== action.index;
             })}
-            break;
         default:
             return "hello world";
-            break;
+
       }
     }
     let store1 = redux.createStore(reducer1);
-    console.log(store1.getState());
+    //this function must be declare before dispatch.
+    store1.subscribe(()=>{
+      console.log(store1.getState());
+    });
+
     store1.dispatch({type: "CHANGE_STATUS"});
-    console.log(store1.getState());
+
     store1.dispatch({type: "ADD_NEW", newItem: "lion"});
-    console.log(store1.getState());
+
     store1.dispatch({type: "DELETE", index: 2});
-    console.log(store1.getState());
+    
+    
     return (
       <div className="App">
         <header className="App-header">
