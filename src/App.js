@@ -20,6 +20,11 @@ class App extends Component {
         case "ADD_NEW":
             return {...oldState, num: [...state.num, action.newItem]}
             break;
+        case "DELETE":
+            return {...oldState, num: state.num.filter((value, key)=>{
+              return key != action.index;
+            })}
+            break;
         default:
             return "hello world";
             break;
@@ -30,6 +35,8 @@ class App extends Component {
     store1.dispatch({type: "CHANGE_STATUS"});
     console.log(store1.getState());
     store1.dispatch({type: "ADD_NEW", newItem: "lion"});
+    console.log(store1.getState());
+    store1.dispatch({type: "DELETE", index: 2});
     console.log(store1.getState());
     return (
       <div className="App">
