@@ -1,4 +1,9 @@
-.News button{
-    padding-top: 10px;
+.center{
     text-align: center;
+}
+.button{
+    text-align: center;
+}
+.button button{
+    color: red;
 }

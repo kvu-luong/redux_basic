@@ -11,7 +11,7 @@ class App extends Component {
     return (
       <div className="App">
         <News/>
-        {this.props.dulieu}
+        <h3 style={{"text-align": "center"}}>{this.props.dulieu}</h3>
       </div>
     );  
   }
