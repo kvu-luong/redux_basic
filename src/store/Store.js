@@ -1,34 +1,24 @@
+import numReducer from "./reducer/numReducer";
+import editStatusReducer from "./reducer/statusReducer";
+
 let redux = require("redux");
 
-//create state for reducer
-let oldState = {
-    num: ["man hinh", "chuot", "desktop"],
-    editStatus : true,
-  }
-//create reducer
-var reducer1 = (state = oldState, action) =>{
-    switch(action.type){
-      case "CHANGE_STATUS":
-          return {...oldState, editStatus: !state.editStatus }
-      case "ADD_NEW":
-          return {...oldState, num: [...state.num, action.newItem]}
-      case "DELETE":
-          return {...oldState, num: state.num.filter((value, key)=>{
-            return key !== action.index;
-          })}
-      default:
-          return "hello world";
+let allReducer = redux.combineReducers({
+    num: numReducer,
+    status: editStatusReducer
+})
+  
 
-    }
-  }
+
 //create store for this reducer
-let store1 = redux.createStore(reducer1);
+let store1 = redux.createStore(allReducer);
 
 //check status of state when it have been changed
 //this function must be declare before dispatch.
  store1.subscribe(()=>{
     console.log(store1.getState());
   });
+
 //call out specific action in reducer
 store1.dispatch({type: "CHANGE_STATUS"});
 
